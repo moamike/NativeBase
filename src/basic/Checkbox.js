@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
-import IconNB from 'react-native-vector-icons/Ionicons';
+import Icon from '../Icon';
 import { connectStyle } from 'native-base-shoutem-theme';
 
 import mapPropsToStyleNames from '../utils/mapPropsToStyleNames';
@@ -14,6 +14,9 @@ class CheckBox extends Component {
     theme: PropTypes.object
   };
 
+  componentDidMount() {
+    console.warm("checkbox mounted")
+  }
   getInitialStyle(variables) {
     const { color, checked, checkboxType, borderColor } = this.props;
     return {
@@ -58,22 +61,9 @@ class CheckBox extends Component {
         ref={c => (this._root = c)}
         {...this.prepareRootProps(variables)}
       >
-        <IconNB
-          style={{
-            color:
-              checked === true
-                ? tickColor || variables.checkboxTickColor
-                : variables.checkboxDefaultColor,
-            fontSize: variables.CheckboxFontSize,
-            lineHeight: variables.CheckboxIconSize,
-            marginTop: variables.CheckboxIconMarginTop,
-            textShadowRadius: variables.checkboxTextShadowRadius
-          }}
-          name={
-            platform === PLATFORM.IOS && platformStyle !== PLATFORM.MATERIAL
-              ? 'ios-checkmark'
-              : 'md-checkmark'
-          }
+        <Icon
+          type="FontAwesome"
+          name="check"
         />
       </TouchableOpacity>
     );
